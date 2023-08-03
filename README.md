@@ -26,4 +26,4 @@ And to start running our vehicle we have put push button to start the vehicle jo
 
 The measurements of our vehicle:
 
-Our vehicle is only 14 centimeters high, about 19 centimeters wide, about 26 centimeters long, and weighs ---- kilograms, which follows the World Robot Olympiad Rules.
+Our vehicle is only 14 centimeters high, about 19 centimeters wide, about 26 centimeters long, and the weight of the car does not exceed 1400 grams, which follows the World Robot Olympiad Rules.
