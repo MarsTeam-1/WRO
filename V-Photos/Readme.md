@@ -1,2 +1,2 @@
-Those our OLD and NEW Vehicle photos (FUNNY / OFFICIAL).
+Those our OLD and NEW Vehicle photos.
 
