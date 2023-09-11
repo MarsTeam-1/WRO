@@ -1,4 +1,4 @@
-**Introduction**
+**Introduction :**
 
   The development of the MARS vehicle has been achieved through the integration of a dual microcontroller system, 
 featuring both a Raspberry Pi and an Arduino. This innovative setup has enabled the MARS vehicle to harness the strengths of both platforms,
@@ -13,7 +13,7 @@ This connectivity is achieved through a reliable serial connection, allowing for
   This collaborative synergy between the Raspberry Pi and Arduino empowers the MARS vehicle with a versatile and powerful computing platform,
 capable of executing complex maneuvers, processing sensor data, and responding to dynamic environmental conditions with precision and efficiency.
 
-**C Coding**
+**C Coding :**
 
   The code is structured into distinct sections, each serving a specific purpose within the control system of the servo motor and gyro sensor.
 
@@ -43,7 +43,8 @@ vehicle rotation at arbitrary angles and to manage steering angles effectively.
   In summary, the code architecture is well-organized into clear sections, with each function serving a specific and well-defined role in ensuring the precise control and maneuvering
 of the vehicle.
 
-**Python Coding**
+**Python Coding:**
+
   The Raspberry Pi's native Python environment was leveraged to orchestrate camera operations and image processing. This robust pipeline enabled the extraction of essential information from captured images.
 
 Color Space Transformation:
