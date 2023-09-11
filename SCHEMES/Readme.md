@@ -1,1 +1,1 @@
-this is our schemes.
+These are our diagrams that talk about our electronic parts.
