@@ -44,7 +44,7 @@ void dmpDataReady() {
 float angle=ypr[0];                          // variable for angle DATA - Z Axis-
 
 // DC motor parameters and pins
-byte dcmotfpin=5;                     // output pin for FORWARD DC driving motor 
+byte dcmotfpin=2;                     // output pin for FORWARD DC driving motor 
 byte dcmotbpin=4;                     // output pin for BACKWARD DC driving motor 
 int speedo=200;                       // speed for driving dc motor
 
@@ -52,8 +52,8 @@ int speedo=200;                       // speed for driving dc motor
 //byte stearRmotpin=4;                  
 //byte stearLmotpin =5;               
 Servo servo;
-int pos = 87 ;                       // servo motor intial angle position in forward position
-byte servopin = 2;                    // output pwm pin for servo stearing motor
+int pos = 90 ;                       // servo motor intial angle position in forward position
+byte servopin = 5;                    // output pwm pin for servo stearing motor
 
 
 // color sensor parameters and pins
@@ -169,7 +169,7 @@ void loop()
     readdistance(rtrig, recho, 'R');
     delay(10);
     readdistance(ftrig, fecho, 'F');
-    if( (10 < fdistance < 83)  &&  (rdistance > 65))
+    if( (fdistance < 83)  &&  (rdistance > 65))
     {
       lap++;
       Serial.print("lap = ");
@@ -182,11 +182,102 @@ void loop()
           while(true)
           {
             right();
-            //delay(1000);
-            readdistance(rtrig, recho, 'R');
-            delay(10);
-            readdistance(ltrig, lecho, 'L');
-            if(80 > rdistance > 35 || 30 > ldistance > 10)
+            if(pioutput = "A" || pioutput = "B") // A = red pillars on the right // B = red pillars on the middle.
+            {
+              while(true)
+              {
+                right();
+                if(pioutput = "C")               // C = red pillars on the left.
+                {
+                  straight();
+                  forward(200);
+                  readdistance(ltrig, lecho, 'L');
+                  if(ldistance < 15)
+                  {
+                    delay(100);
+                    left();
+                    readdistance(bltrig, blecho, 'N');
+                    if(bldistance < 15)
+                    {
+                      left();
+                      delay(100);
+                      straight();
+                      while(true)
+                      {
+                        straight();
+                        delay(10);
+                        forward(200);
+                        readul();
+                        if(minf < intfdistance < maxf && minr < intrdistance < maxr && minl < intldistance < maxl )
+                        {
+                          while(true)
+                          {
+                            //delay(100);
+                            stopdriving();
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            if(pioutput = "F" || pioutput = "E") // F = green pillars on the left // green pillars on the middle.
+            {
+              while(true)
+              {
+                left();
+                if(pioutput = "D")               // D = green pillars on the right.
+                {
+                  straight();
+                  forward(200);
+                  readdistance(rtrig, recho, 'R');
+                  if(rdistance < 15)
+                  {
+                    delay(100);
+                    right();
+                    readdistance(brtrig, brecho, 'M');
+                    if(brdistance < 15)
+                    {
+                      right();
+                      delay(100);
+                      straight();
+                      while(true)
+                      {
+                        straight();
+                        delay(10);
+                        forward(200);
+                        readul();
+                        if(minf < intfdistance < maxf && minr < intrdistance < maxr && minl < intldistance < maxl )
+                        {
+                          while(true)
+                          {
+                            //delay(100);
+                            stopdriving();
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            if((pioutput = "C") || (pioutput = "D")) // C = red pillars on the left // D = green pillars on the right.
+            {
+              straight();
+              delay(10);
+              forward(200);
+              readul();
+              if(minf < intfdistance < maxf && minr < intrdistance < maxr && minl < intldistance < maxl )
+              {
+                while(true)
+                {
+                  //delay(100);
+                  stopdriving();
+                }
+              }
+            }
+            /*else
             {
               while(true)
               {
@@ -203,15 +294,16 @@ void loop()
                   }
                 }
               }
-            }
+            }*/
           }
         }
+        break;
       }
     }
     readdistance(ltrig, lecho, 'L');
     delay(10);
     readdistance(ftrig, fecho, 'F');
-    if( 10 < fdistance < 83  &&  ldistance > 65)
+    if(fdistance < 83  &&  ldistance > 65)
     {
       lap++;
       Serial.print("lap = ");
@@ -220,15 +312,109 @@ void loop()
       {
         left();
         if(lap == 13)
-        {  
+        { 
           while(true)
           {
             left();
-            //delay(1000);
-            readdistance(rtrig, recho, 'R');
-            delay(10);
-            readdistance(ltrig, lecho, 'L');
-            if(80 > rdistance > 35 || 30 > ldistance > 10)
+            if(pioutput = "A" || pioutput = "B") // A = red pillars on the right // B = red pillars on the middle.
+            {
+              while(true)
+              {
+                right();
+                if(pioutput = "C")               // C = red pillars on the left.
+                {
+                  straight();
+                  forward(200);
+                  readdistance(ltrig, lecho, 'L');
+                  if(ldistance < 15)
+                  {
+                    delay(100);
+                    left();
+                    readdistance(bltrig, blecho, 'N');
+                    if(bldistance < 15)
+                    {
+                      left();
+                      delay(100);
+                      straight();
+                      while(true)
+                      {
+                        straight();
+                        delay(10);
+                        forward(200);
+                        readul();
+                        if(minf < intfdistance < maxf && minr < intrdistance < maxr && minl < intldistance < maxl )
+                        {
+                          while(true)
+                          {
+                            //delay(100);
+                            stopdriving();
+                            //break;
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            if(pioutput = "F" || pioutput = "E") // F = green pillars on the left // green pillars on the middle.
+            {
+              while(true)
+              {
+                left();
+                if(pioutput = "D")               // D = green pillars on the right.
+                {
+                  straight();
+                  forward(200);
+                  readdistance(rtrig, recho, 'R');
+                  if(rdistance < 15)
+                  {
+                    delay(100);
+                    right();
+                    readdistance(brtrig, brecho, 'M');
+                    if(brdistance < 15)
+                    {
+                      right();
+                      delay(100);
+                      straight();
+                      while(true)
+                      {
+                        straight();
+                        delay(10);
+                        forward(200);
+                        readul();
+                        if(minf < intfdistance < maxf && minr < intrdistance < maxr && minl < intldistance < maxl )
+                        {
+                          while(true)
+                          {
+                            //delay(100);
+                            stopdriving();
+                            //break;
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            if((pioutput = "C") || (pioutput = "D")) // C = red pillars on the left // D = green pillars on the right.
+            {
+              straight();
+              delay(10);
+              forward(200);
+              readul();
+              if(minf < intfdistance < maxf && minr < intrdistance < maxr && minl < intldistance < maxl )
+              {
+                while(true)
+                {
+                  //delay(100);
+                  stopdriving();
+                  //break;
+                }
+              }
+            }
+            /*else
             {
               while(true)
               {
@@ -245,9 +431,10 @@ void loop()
                   }
                 }
               }
-            }
+            }*/
           }
         }
+        break;
       }
     }
 
@@ -261,13 +448,24 @@ void loop()
         {
           straight();
           forward(200);
-          delay(2000);
-          left();
-          delay(500);
-          break;
+          readdistance(ltrig, lecho, 'L');
+          if(ldistance < 15)
+          {
+            delay(100);
+            left();
+            readdistance(bltrig, blecho, 'N');
+            if(bldistance < 15)
+            {
+              left();
+              delay(100);
+              straight();
+              //break;
+            }
+          }
         }
       }
     }
+
     if(pioutput = "F" || pioutput = "E") // F = green pillars on the left // green pillars on the middle.
     {
       while(true)
@@ -277,14 +475,29 @@ void loop()
         {
           straight();
           forward(200);
-          break;
+          readdistance(rtrig, recho, 'R');
+          if(rdistance < 15)
+          {
+            delay(100);
+            right();
+            readdistance(brtrig, brecho, 'M');
+            if(brdistance < 15)
+            {
+              right();
+              delay(100);
+              straight();
+              //break;
+            }
+          }
         }
       }
     }
     if((pioutput = "C") || (pioutput = "D")) // C = red pillars on the left // D = green pillars on the right.
     {
       straight();
+      delay(10);
       forward(200);
+      //break;
     }
     break;
   }
@@ -341,19 +554,19 @@ void readul()
 
 void straight()
 {
-  pos= 87;
-  servo.write(pos);
-}
-
-void left()
-{
-  pos=155;
+  pos= 90;
   servo.write(pos);
 }
 
 void right()
 {
-  pos=35;
+  pos=140;
+  servo.write(pos);
+}
+
+void left()
+{
+  pos=50;
   servo.write(pos);
 }
 
