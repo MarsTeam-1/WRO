@@ -76,7 +76,7 @@ bool enLcolor = true, enRcolor = true ;
 
 
 // start button parameters and pins
-byte startpin=45;                     // input pin for start push button                ////////////////////////////تعديل البننات///////////////////////////////////////////////////////////////
+byte startpin=45;                     // input pin for start push button                
 byte startsignal;                     // DATA from button - HIGH or LOW-
 
 // ultrasonic sensor parameters and pins
@@ -123,12 +123,12 @@ void setup()
 {
   Serial.begin(115200);
   Wire.begin();
-  //mpusetup();
+  //mpusetup();                              //gyro had some issues ... 
   delay(1000);
-  pinMode(24,OUTPUT);                      // left color sensor enable
-  pinMode(48,OUTPUT);                       // right color sensor enable
-  digitalWrite(48,LOW);
-  digitalWrite(24,LOW);
+  //pinMode(24,OUTPUT);                      // left color sensor enable
+  //pinMode(48,OUTPUT);                      // right color sensor enable
+  //digitalWrite(48,LOW);
+  //digitalWrite(24,LOW);
   pinMode(ftrig, OUTPUT); 
   pinMode(fecho, INPUT);
   pinMode(rtrig, OUTPUT); 
@@ -211,6 +211,7 @@ void loop()
 
       
                               //fallior old tests:
+                              //gyro test ...
                                         //readdistance(ltrig, lecho, 'L');
                                         //delay(10);
                                         //readdistance(atrig, aecho, 'A');
@@ -279,12 +280,13 @@ void loop()
     delay(1000);
     while(true)
     {
-      //delay(1000);                                                        ////////////////تعديل الوقت ما قبل القرائة//////////////////////////////////////
+      //delay(1000);                                                       
       readdistance(rtrig, recho, 'R');
       //delay(10);
       readdistance(btrig, becho, 'B');
 
                                 //fallior old tests:
+                                ////gyro test ...
                                       //(0.00 < angle < 0.02) ||
                                       //|| (3.06 < angle < 3.09) || ( -3.09 < angle < -3.06 ) || ( -1.57 < angle < -1.54)
                                       //|| (angle > 2.93) 
